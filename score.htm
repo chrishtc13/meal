@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Game Score System</title>
+</head>
+<body>
+
+<h2>Game Score System</h2>
+
+<div>
+  <h3>Set Players</h3>
+  <input type="text" id="player1" placeholder="Player 1 Name">
+  <input type="text" id="player2" placeholder="Player 2 Name">
+  <input type="text" id="player3" placeholder="Player 3 Name">
+  <input type="text" id="player4" placeholder="Player 4 Name">
+  <button onclick="setPlayers()">Set Players</button>
+</div>
+
+<div>
+  <h3>This Game</h3>
+  <button onclick="startGame()">Start Game</button>
+  <div id="gameInputs" style="display: none;">
+    <div>
+      <input type="text" id="winner1" placeholder="Winner">
+      <input type="text" id="loser1" placeholder="Loser">
+      <input type="number" id="score1" placeholder="Score">
+    </div>
+    <div>
+      <input type="text" id="winner2" placeholder="Winner">
+      <input type="text" id="loser2" placeholder="Loser">
+      <input type="number" id="score2" placeholder="Score">
+    </div>
+    <div>
+      <input type="text" id="winner3" placeholder="Winner">
+      <input type="text" id="loser3" placeholder="Loser">
+      <input type="number" id="score3" placeholder="Score">
+    </div>
+    <button onclick="recordScores()">Record Scores</button>
+  </div>
+</div>
+
+<div>
+  <h3>Score</h3>
+  <button onclick="showScore()">Show Score</button>
+</div>
+
+<div id="statistics">
+  <h3>Statistics</h3>
+  <!-- Statistics will be displayed here -->
+</div>
+
+
+
+
+<script>
+var players = [];
+var gameRecords = []; // Store game sessions
+
+function setPlayers() {
+  players = []; // Reset the players array
+  for (let i = 1; i <= 4; i++) {
+    let playerName = document.getElementById('player' + i).value;
+    if (playerName) {
+      players.push(playerName);
+    }
+  }
+  console.log('Players set:', players);
+}
+
+function startGame() {
+  if (players.length < 2) {
+    alert('Please set at least two players.');
+    return;
+  }
+  
+  // Show the game inputs
+  document.getElementById('gameInputs').style.display = 'block';
+}
+
+function recordScores() {
+  // Record the scores from the input fields
+  for (let i = 1; i <= 3; i++) {
+    let winner = document.getElementById('winner' + i).value;
+    let loser = document.getElementById('loser' + i).value;
+    let score = parseInt(document.getElementById('score' + i).value, 10);
+    
+    if (winner && loser && !isNaN(score)) {
+      gameRecords.push({ winner, loser, score });
+    }
+  }
+  
+  // Clear the input fields after recording
+  for (let i = 1; i <= 3; i++) {
+    document.getElementById('winner' + i).value = '';
+    document.getElementById('loser' + i).value = '';
+    document.getElementById('score' + i).value = '';
+  }
+  
+  // Hide the game inputs
+  document.getElementById('gameInputs').style.display = 'none';
+  console.log('Game records:', gameRecords);
+}
+
+function showScore() {
+  let statistics = players.reduce((acc, player) => {
+    acc[player] = { netWins: 0, scoresWon: 0, scoresLost: 0 };
+    return acc;
+  }, {});
+  
+  // Calculate wins and total scores
+  for (let record of gameRecords) {
+    if (statistics[record.winner]) {
+      statistics[record.winner].scoresWon += record.score;
+    }
+    if (statistics[record.loser]) {
+      statistics[record.loser].scoresLost += record.score;
+    }
+  }
+  
+  // Calculate net wins
+  for (let player in statistics) {
+    statistics[player].netWins = statistics[player].scoresWon - statistics[player].scoresLost;
+  }
+  
+  // Display the statistics
+  let statsDisplay = '';
+  for (let player of players) {
+    statsDisplay += player + ' - Net Wins: ' + statistics[player].netWins + ', Scores Won: ' + statistics[player].scoresWon + ', Scores Lost: ' + statistics[player].scoresLost + '<br>';
+  }
+  
+  document.getElementById('statistics').innerHTML = statsDisplay;
+}
+
+</script>
+
+</body>
+</html>
+
