@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>簡易點餐系統</title>
+</head>
+<body>
+
+<h2>簡易點餐系統</h2>
+
+<form id="orderForm">
+    <h3>請選擇您的餐點：</h3>
+    
+    <p>
+        <input type="checkbox" name="item" value="Latte" data-price="60"> 拿鐵咖啡 ($60) 
+        <select name="Latte-option">
+            <option value="regular">常溫</option>
+            <option value="hot">加熱</option>
+            <option value="iced">加冰</option>
+        </select>
+    </p>
+    
+    <p>
+        <input type="checkbox" name="item" value="ChickenSalad" data-price="80"> 雞肉沙拉 ($80) 
+        <select name="ChickenSalad-option">
+            <option value="withAvocado">加牛油果</option>
+            <option value="withoutAvocado">不加牛油果</option>
+        </select>
+    </p>
+    
+    <p>
+        <input type="checkbox" name="item" value="Pasta" data-price="100"> 義大利麵 ($100) 
+        <select name="Pasta-option">
+            <option value="tomato">番茄醬</option>
+            <option value="cream">奶油醬</option>
+        </select>
+    </p>
+    
+    <p>
+        <input type="checkbox" name="item" value="Cheesecake" data-price="70"> 起司蛋糕 ($70) 
+        <select name="Cheesecake-option">
+            <option value="blueberry">藍莓醬</option>
+            <option value="strawberry">草莓醬</option>
+        </select>
+    </p>
+    
+    <p>
+        <input type="checkbox" name="item" value="FruitPlatter" data-price="90"> 水果拼盤 ($90) 
+        <select name="FruitPlatter-option">
+            <option value="standard">標準</option>
+            <option value="large">大份</option>
+        </select>
+    </p>
+    
+    <button type="button" onclick="calculateOrder()">計算總金額</button>
+</form>
+
+<h4>您的點餐摘要：</h4>
+<div id="orderSummary"></div>
+
+<script>
+function calculateOrder() {
+    let total = 0;
+    let summary = '您選擇了：\n';
+    const form = document.getElementById('orderForm');
+    const items = form.querySelectorAll('input[name="item"]:checked');
+
+    items.forEach((item) => {
+        const itemName = item.value;
+        const itemPrice = parseInt(item.dataset.price);
+        const option = form[itemName + '-option'].value;
+        total += itemPrice;
+        summary += `${itemName} - 選項：${option} - $${itemPrice}\n`;
+    });
+
+    summary += `總計: $${total}`;
+    document.getElementById('orderSummary').innerHTML = summary.replace(/\n/g, '<br>');
+}
+</script>
+
+</body>
+</html>
