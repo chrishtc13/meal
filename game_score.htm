@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interactive Text</title>
+    <style>
+.scroll-container {
+    display: flex;
+    overflow-x: auto;
+    padding: 10px;
+    border: 1px solid #ccc;
+    margin-bottom: 10px;
+height: 200px;
+width: 95%;
+  }
+
+        #textElement {
+            display: inline-block;
+            padding: 20px 40px;
+            border: 2px solid black;
+            border-radius: 50%/30%; /* Ellipse shape */
+            background-color: white;
+            color: black;
+            cursor: pointer;
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        #textElement.active {
+            background-color: orange;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <div id="textElement" onclick="handleClick(this)" onmouseleave="handleMouseLeave(this)">大姊夫</div>
+    <div id="textElement" onclick="handleClick(this)" onmouseleave="handleMouseLeave(this)">二姊夫</div>
+    <div id="textElement" onclick="handleClick(this)" onmouseleave="handleMouseLeave(this)">小姨丈</div>
+    <div id="textElement" onclick="handleClick(this)" onmouseleave="handleMouseLeave(this)">子君</div>
+    <div id="textElement" onclick="handleClick(this)" onmouseleave="handleMouseLeave(this)">珩</div>
+    <div id="textElement" onclick="handleClick(this)" onmouseleave="handleMouseLeave(this)">媽媽</div>
+<br>
+    <div id="textElement" onclick="handleClick(this)" onmouseleave="handleMouseLeave(this)">贏</div>
+<br>
+    <div id="textElement" onclick="handleClick(this)" onmouseleave="handleMouseLeave(this)">1</div>
+    <div id="textElement" onclick="handleClick(this)" onmouseleave="handleMouseLeave(this)">2</div>
+    <div id="textElement" onclick="handleClick(this)" onmouseleave="handleMouseLeave(this)">3</div>
+    <div id="textElement" onclick="handleClick(this)" onmouseleave="handleMouseLeave(this)">4</div>
+    <div id="textElement" onclick="handleClick(this)" onmouseleave="handleMouseLeave(this)">5</div>
+    <div id="textElement" onclick="handleClick(this)" onmouseleave="handleMouseLeave(this)">6</div>
+    <div id="textElement" onclick="handleClick(this)" onmouseleave="handleMouseLeave(this)">7</div>
+    <div id="textElement" onclick="handleClick(this)" onmouseleave="handleMouseLeave(this)">8</div>
+    <div id="textElement" onclick="handleClick(this)" onmouseleave="handleMouseLeave(this)">9</div>
+    <div id="textElement" onclick="handleClick(this)" onmouseleave="handleMouseLeave(this)">0</div>
+<br>
+    <div id="textElement" onclick="handleClick(this)" onmouseleave="handleMouseLeave(this)">。</div>
+<div id="textElement" onclick="copyTextToClipboard()">複製</div>
+<div id="gameRecord" class="scroll-container"></div>
+
+    <script>
+        function handleClick(e) {
+		e.classList.add('active');
+
+		clickValue = e.innerText;
+
+		let allGames = sessionStorage.getItem('allGames');
+		allGames = allGames ? allGames + clickValue : clickValue;
+		sessionStorage.setItem('allGames', allGames);
+		document.getElementById('gameRecord').innerHTML = allGames.replaceAll("。","。<br>");
+        }
+
+        function handleMouseLeave(e) {
+            e.classList.remove('active');
+        }
+
+function copyTextToClipboard() {
+	let allGames = sessionStorage.getItem('allGames');
+
+    navigator.clipboard.writeText(allGames).then(function() {
+        alert("已複製");
+    }).catch(function(err) {
+        alert("複製失敗");
+    });
+}
+
+    </script>
+</body>
+</html>
