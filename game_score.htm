@@ -3,33 +3,33 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Interactive Text</title>
+    <title>Game Score</title>
     <style>
-.scroll-container {
-    display: flex;
-    overflow-x: auto;
-    padding: 10px;
-    border: 1px solid #ccc;
-    margin-bottom: 10px;
-height: 200px;
-width: 95%;
-  }
+    .scroll-container {
+        display: flex;
+        overflow-x: auto;
+        padding: 10px;
+        border: 1px solid #ccc;
+        margin-bottom: 10px;
+        height: 200px;
+        width: 95%;
+    }
 
-        #textElement {
-            display: inline-block;
-            padding: 20px 40px;
-            border: 2px solid black;
-            border-radius: 50%/30%; /* Ellipse shape */
-            background-color: white;
-            color: black;
-            cursor: pointer;
-            transition: background-color 0.3s, color 0.3s;
-        }
+    #textElement {
+        display: inline-block;
+        padding: 20px 40px;
+        border: 2px solid black;
+        border-radius: 50%/30%; /* Ellipse shape */
+        background-color: white;
+        color: black;
+        cursor: pointer;
+        transition: background-color 0.3s, color 0.3s;
+    }
 
-        #textElement.active {
-            background-color: orange;
-            color: white;
-        }
+    #textElement.active {
+        background-color: orange;
+        color: white;
+    }
     </style>
 </head>
 <body>
@@ -40,9 +40,14 @@ width: 95%;
     <div id="textElement" onclick="handleClick(this)" onmouseleave="handleMouseLeave(this)">媽媽</div>
     <div id="textElement" onclick="handleClick(this)" onmouseleave="handleMouseLeave(this)">小姨</div>
     <div id="textElement" onclick="handleClick(this)" onmouseleave="handleMouseLeave(this)">潔</div>
-<br>
-    <div id="textElement" onclick="handleClick(this)" onmouseleave="handleMouseLeave(this)">贏</div>
-<br>
+    <div id="textElement" onclick="handleClick(this)" onmouseleave="handleMouseLeave(this)">大姊</div>
+    <div id="textElement" onclick="handleClick(this)" onmouseleave="handleMouseLeave(this)">二姊</div>
+    <div id="textElement" onclick="handleClick(this)" onmouseleave="handleMouseLeave(this)">ㄚ</div>
+    <div id="textElement" onclick="handleClick(this)" onmouseleave="handleMouseLeave(this)">彤</div>
+    <div id="textElement" onclick="handleClick(this)" onmouseleave="handleMouseLeave(this)">瑞</div>
+    <div id="textElement" onclick="handleClick(this)" onmouseleave="handleMouseLeave(this)">福</div>
+    <div id="textElement" onclick="handleClick(this)" onmouseleave="handleMouseLeave(this)">寶</div>
+    <br>
     <div id="textElement" onclick="handleClick(this)" onmouseleave="handleMouseLeave(this)">1</div>
     <div id="textElement" onclick="handleClick(this)" onmouseleave="handleMouseLeave(this)">2</div>
     <div id="textElement" onclick="handleClick(this)" onmouseleave="handleMouseLeave(this)">3</div>
@@ -53,37 +58,89 @@ width: 95%;
     <div id="textElement" onclick="handleClick(this)" onmouseleave="handleMouseLeave(this)">8</div>
     <div id="textElement" onclick="handleClick(this)" onmouseleave="handleMouseLeave(this)">9</div>
     <div id="textElement" onclick="handleClick(this)" onmouseleave="handleMouseLeave(this)">0</div>
-<br>
+    <br>
     <div id="textElement" onclick="handleClick(this)" onmouseleave="handleMouseLeave(this)">。</div>
-<div id="textElement" onclick="copyTextToClipboard()">複製</div>
-<div id="gameRecord" class="scroll-container"></div>
+    <div id="textElement" onclick="deleteLast()">上一局算錯</div>
+    <div id="textElement" onclick="deleteAll()">全部算錯</div>
+    <div id="textElement" onclick="copyTextToClipboard()">複製</div>
+    <div id="gameRecord" class="scroll-container"></div>
 
     <script>
+        var clickEnd = 1;
+        var serialNum = 0;
+        var allGames = "create table game (serial_num integer, winner text, loser text, score integer);"
+        updateGame();
+        var isql = "insert into game values(";
+        var valueList = "";
+
         function handleClick(e) {
-		e.classList.add('active');
+		    e.classList.add('active');
 
-		clickValue = e.innerText;
+            pap = isNumber(e.innerText) ? '' : '"';
+            pap2 = isNumber(e.innerText) ? '' : ',';
+            
+            clickValue = e.innerText == '。' ? ');' : pap + e.innerText + pap + pap2;
 
-		let allGames = sessionStorage.getItem('allGames');
-		allGames = allGames ? allGames + clickValue : clickValue;
-		sessionStorage.setItem('allGames', allGames);
-		document.getElementById('gameRecord').innerHTML = allGames.replaceAll("。","。<br>");
+            if (clickEnd == 1) {
+                serialNum = serialNum + 1;
+                insertValue = isql + serialNum + "," + clickValue;
+                clickEnd = 0;
+            } else {
+                insertValue = clickValue;
+            }
+
+            valueList = valueList + clickValue;
+            valueList = valueList.replace(");","");
+
+            allGames = sessionStorage.getItem('allGames');
+            allGames = allGames ? allGames + insertValue : insertValue;
+            updateGame();
+
+            if (e.innerText == '。') {
+                regex = /^"[^0-9]+","[^0-9]+",[0-9]+$/;
+                if (! regex.test(valueList)) {
+                    allGames = sessionStorage.getItem('allGames');
+                    deleteLast();
+                }
+
+                clickEnd = 1;
+                valueList = "";
+            }
+        }
+
+        function deleteLast() {
+            allGames = allGames + "delete from game where serial_num = " + serialNum + ";";
+            updateGame();
+        }
+
+        function deleteAll() {
+            allGames = allGames + "delete from game;";
+            updateGame();
+        }
+
+        function updateGame() {
+            sessionStorage.setItem('allGames', allGames);
+            document.getElementById('gameRecord').innerHTML = allGames.replaceAll(");",");<br>");
+            document.getElementById('gameRecord').innerHTML = allGames.replaceAll(";",";<br>");
+        }
+
+        function isNumber(value) {
+            return /^\d+$/.test(value);
         }
 
         function handleMouseLeave(e) {
             e.classList.remove('active');
         }
 
-function copyTextToClipboard() {
-	let allGames = sessionStorage.getItem('allGames');
-
-    navigator.clipboard.writeText(allGames).then(function() {
-        alert("已複製");
-    }).catch(function(err) {
-        alert("複製失敗");
-    });
-}
-
-    </script>
+        function copyTextToClipboard() {
+        	allGames = sessionStorage.getItem('allGames');
+            allGames = allGames + "select * from game order by serial_num;"
+            navigator.clipboard.writeText(allGames).then(function() {
+                alert("已複製");
+            }).catch(function(err) {
+                alert("沒複製");
+            });
+        }
+</script>
 </body>
 </html>
