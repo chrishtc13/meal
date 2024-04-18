@@ -68,13 +68,17 @@
     <script>
         var clickEnd = 1;
         var serialNum = 0;
-        var allGames = "create table game (serial_num integer, winner text, loser text, score integer);"
+        var allGames = "drop table if exists game;create table game (serial_num integer, winner text, loser text, score integer);"
         updateGame();
         var isql = "insert into game values(";
         var valueList = "";
+        var clickTimes = 0;
 
         function handleClick(e) {
 		    e.classList.add('active');
+
+            clickTimes++;
+            if (! checkClickTimes(e.innerText)) { clickTimes = clickTimes-1; return; }
 
             pap = isNumber(e.innerText) ? '' : '"';
             pap2 = isNumber(e.innerText) ? '' : ',';
@@ -92,20 +96,32 @@
             valueList = valueList + clickValue;
             valueList = valueList.replace(");","");
 
-            allGames = sessionStorage.getItem('allGames');
-            allGames = allGames ? allGames + insertValue : insertValue;
-            updateGame();
-
             if (e.innerText == '。') {
                 regex = /^"[^0-9]+","[^0-9]+",[0-9]+$/;
-                if (! regex.test(valueList)) {
+                if (regex.test(valueList)) {
+                    sqlIns = isql + serialNum + "," + valueList + ");"
                     allGames = sessionStorage.getItem('allGames');
-                    deleteLast();
+                    allGames = allGames ? allGames + sqlIns : sqlIns;
+                    updateGame();
                 }
 
                 clickEnd = 1;
                 valueList = "";
+                clickTimes = 0;
             }
+        }
+
+        function checkClickTimes(v) {
+            if (clickTimes <= 2) {
+                if (isNumber(v) || v == "。") { return false; }
+            }
+            if (clickTimes >= 3) {
+                if (clickTimes >= 4) {
+                    if (v == "。") { return true; }
+                }
+                if (! isNumber(v)) { return false; }
+            }
+            return true;
         }
 
         function deleteLast() {
@@ -134,11 +150,11 @@
 
         function copyTextToClipboard() {
         	allGames = sessionStorage.getItem('allGames');
-            allGames = allGames + "select * from game order by serial_num;"
+            allGames = allGames + "delete from game where winner = loser or score <= 0 or score is null;SELECT player, SUM(score_change) AS net_score FROM (SELECT winner AS player, score AS score_change FROM game UNION ALL SELECT loser AS player, -score AS score_change FROM game) GROUP BY player ORDER BY net_score DESC;with pr1 as (select distinct player from (select winner as player from game union select loser from game)), pr2 as (select a.player as winner, b.player as loser from pr1 a, pr1 b where b.player <> a.player), pr3 as (select p.winner, p.loser, sum(g.score) from game g, pr2 p where g.winner = p.winner and g.loser = p.loser group by 1,2 order by 1,3 desc) select * from pr3;"
             navigator.clipboard.writeText(allGames).then(function() {
                 alert("已複製");
             }).catch(function(err) {
-                alert("沒複製");
+                alert("沒有複製成功喔");
             });
         }
 </script>
