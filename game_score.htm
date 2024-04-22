@@ -15,54 +15,84 @@
         width: 95%;
     }
 
-    #textElement {
+    #textElement_1 {
+        width: 50px;
+        height: 20px;
+        border-radius: 50%;
+        text-align: center;
         display: inline-block;
         padding: 20px 40px;
+        margin-bottom: 5px;
         border: 2px solid black;
-        border-radius: 50%/30%; /* Ellipse shape */
         background-color: white;
         color: black;
         cursor: pointer;
         transition: background-color 0.3s, color 0.3s;
     }
 
-    #textElement.active {
+    #textElement_1.active {
         background-color: orange;
         color: white;
     }
-    </style>
+
+    #textElement_2 {
+        width: 20px;
+        height: 20px;
+        border-radius: 50%;
+        text-align: center;
+        display: inline-block;
+        padding: 20px 40px;
+        margin-bottom: 5px;
+        border: 2px solid black;
+        background-color: white;
+        color: black;
+        cursor: pointer;
+        transition: background-color 0.3s, color 0.3s;
+    }
+
+    #textElement_2.active {
+        background-color: orange;
+        color: white;
+    }
+</style>
 </head>
 <body>
-    <div id="textElement" onclick="handleClick(this)" onmouseleave="handleMouseLeave(this)">君</div>
-    <div id="textElement" onclick="handleClick(this)" onmouseleave="handleMouseLeave(this)">大姊夫</div>
-    <div id="textElement" onclick="handleClick(this)" onmouseleave="handleMouseLeave(this)">二姊夫</div>
-    <div id="textElement" onclick="handleClick(this)" onmouseleave="handleMouseLeave(this)">小姨丈</div>
-    <div id="textElement" onclick="handleClick(this)" onmouseleave="handleMouseLeave(this)">媽媽</div>
-    <div id="textElement" onclick="handleClick(this)" onmouseleave="handleMouseLeave(this)">小姨</div>
-    <div id="textElement" onclick="handleClick(this)" onmouseleave="handleMouseLeave(this)">潔</div>
-    <div id="textElement" onclick="handleClick(this)" onmouseleave="handleMouseLeave(this)">大姊</div>
-    <div id="textElement" onclick="handleClick(this)" onmouseleave="handleMouseLeave(this)">二姊</div>
-    <div id="textElement" onclick="handleClick(this)" onmouseleave="handleMouseLeave(this)">ㄚ</div>
-    <div id="textElement" onclick="handleClick(this)" onmouseleave="handleMouseLeave(this)">彤</div>
-    <div id="textElement" onclick="handleClick(this)" onmouseleave="handleMouseLeave(this)">瑞</div>
-    <div id="textElement" onclick="handleClick(this)" onmouseleave="handleMouseLeave(this)">福</div>
-    <div id="textElement" onclick="handleClick(this)" onmouseleave="handleMouseLeave(this)">寶</div>
-    <br>
-    <div id="textElement" onclick="handleClick(this)" onmouseleave="handleMouseLeave(this)">1</div>
-    <div id="textElement" onclick="handleClick(this)" onmouseleave="handleMouseLeave(this)">2</div>
-    <div id="textElement" onclick="handleClick(this)" onmouseleave="handleMouseLeave(this)">3</div>
-    <div id="textElement" onclick="handleClick(this)" onmouseleave="handleMouseLeave(this)">4</div>
-    <div id="textElement" onclick="handleClick(this)" onmouseleave="handleMouseLeave(this)">5</div>
-    <div id="textElement" onclick="handleClick(this)" onmouseleave="handleMouseLeave(this)">6</div>
-    <div id="textElement" onclick="handleClick(this)" onmouseleave="handleMouseLeave(this)">7</div>
-    <div id="textElement" onclick="handleClick(this)" onmouseleave="handleMouseLeave(this)">8</div>
-    <div id="textElement" onclick="handleClick(this)" onmouseleave="handleMouseLeave(this)">9</div>
-    <div id="textElement" onclick="handleClick(this)" onmouseleave="handleMouseLeave(this)">0</div>
-    <br>
-    <div id="textElement" onclick="handleClick(this)" onmouseleave="handleMouseLeave(this)">。</div>
-    <div id="textElement" onclick="deleteLast()">上一局算錯</div>
-    <div id="textElement" onclick="deleteAll()">全部算錯</div>
-    <div id="textElement" onclick="copyTextToClipboard()">複製</div>
+    <div>
+    <div id="textElement_1" onclick="handleClick(this)" onmouseleave="handleMouseLeave(this)">君</div>
+    <div id="textElement_1" onclick="handleClick(this)" onmouseleave="handleMouseLeave(this)">大姊夫</div>
+    <div id="textElement_1" onclick="handleClick(this)" onmouseleave="handleMouseLeave(this)">二姊夫</div>
+    <div id="textElement_1" onclick="handleClick(this)" onmouseleave="handleMouseLeave(this)">小姨丈</div>
+    <div id="textElement_1" onclick="handleClick(this)" onmouseleave="handleMouseLeave(this)">媽媽</div>
+    <div id="textElement_1" onclick="handleClick(this)" onmouseleave="handleMouseLeave(this)">小姨</div>
+    <div id="textElement_1" onclick="handleClick(this)" onmouseleave="handleMouseLeave(this)">潔</div>
+    <div id="textElement_1" onclick="handleClick(this)" onmouseleave="handleMouseLeave(this)">大姊</div>
+    <div id="textElement_1" onclick="handleClick(this)" onmouseleave="handleMouseLeave(this)">二姊</div>
+    <div id="textElement_1" onclick="handleClick(this)" onmouseleave="handleMouseLeave(this)">ㄚ</div>
+    <div id="textElement_1" onclick="handleClick(this)" onmouseleave="handleMouseLeave(this)">彤</div>
+    <div id="textElement_1" onclick="handleClick(this)" onmouseleave="handleMouseLeave(this)">瑞</div>
+    <div id="textElement_1" onclick="handleClick(this)" onmouseleave="handleMouseLeave(this)">福</div>
+    <div id="textElement_1" onclick="handleClick(this)" onmouseleave="handleMouseLeave(this)">寶</div>
+    </div>
+    <div>
+    <div id="textElement_2" onclick="handleClick(this)" onmouseleave="handleMouseLeave(this)">1</div>
+    <div id="textElement_2" onclick="handleClick(this)" onmouseleave="handleMouseLeave(this)">2</div>
+    <div id="textElement_2" onclick="handleClick(this)" onmouseleave="handleMouseLeave(this)">3</div>
+    <div id="textElement_2" onclick="handleClick(this)" onmouseleave="handleMouseLeave(this)">4</div>
+    <div id="textElement_2" onclick="handleClick(this)" onmouseleave="handleMouseLeave(this)">5</div>
+    <div id="textElement_2" onclick="handleClick(this)" onmouseleave="handleMouseLeave(this)">6</div>
+    <div id="textElement_2" onclick="handleClick(this)" onmouseleave="handleMouseLeave(this)">7</div>
+    <div id="textElement_2" onclick="handleClick(this)" onmouseleave="handleMouseLeave(this)">8</div>
+    <div id="textElement_2" onclick="handleClick(this)" onmouseleave="handleMouseLeave(this)">9</div>
+    <div id="textElement_2" onclick="handleClick(this)" onmouseleave="handleMouseLeave(this)">0</div>
+    </div>
+    <div>
+    <div id="textElement_2" onclick="handleClick(this)" onmouseleave="handleMouseLeave(this)">。</div>
+    </div>
+    <div>
+    <div id="textElement_1" onclick="deleteLast()">剛算錯</div>
+    <div id="textElement_1" onclick="deleteAll()">全算錯</div>
+    <div id="textElement_1" onclick="copyTextToClipboard()">複製</div>
+    </div>
     <div id="gameRecord" class="scroll-container"></div>
 
     <script>
@@ -73,6 +103,7 @@
         var isql = "insert into game values(";
         var valueList = "";
         var clickTimes = 0;
+        var currentWinner = "";
 
         function handleClick(e) {
 		    e.classList.add('active');
@@ -105,13 +136,19 @@
                     updateGame();
                 }
 
-                clickEnd = 1;
-                valueList = "";
-                clickTimes = 0;
+                resetOne();
             }
         }
 
+        function resetOne() {
+            clickEnd = 1;
+            valueList = "";
+            clickTimes = 0;
+        }
+
         function checkClickTimes(v) {
+            if (clickTimes == 1) { currentWinner = v }
+            if (clickTimes == 2) { if (v == currentWinner) { return false } }
             if (clickTimes <= 2) {
                 if (isNumber(v) || v == "。") { return false; }
             }
