@@ -11,23 +11,50 @@
         padding: 10px;
         border: 1px solid #ccc;
         margin-bottom: 20px;
-        height: 200px;
-        width: 95%;
+        height: 100px;
+        width: 90%;
+        font-family: 'Courier New', Courier, monospace;
+        font-weight:bold;
+    }
+
+    .scroll-container_1 {
+        display: inline-block;
+        overflow-x: auto;
+        padding: 10px;
+        border: 1px solid #ccc;
+        margin-bottom: 20px;
+        height: 280px;
+        width: 25%;
+    }
+
+    .scroll-container_2 {
+        display: inline-block;
+        overflow-x: auto;
+        padding: 10px;
+        border: 1px solid #ccc;
+        margin-bottom: 20px;
+        height: 280px;
+        width: 35%;
     }
 
     #textElement_1 {
-        width: 50px;
+        width: 80px;
         height: 20px;
-        border-radius: 50%;
+        border-radius: 10px;
         text-align: center;
-        display: inline-block;
-        padding: 20px 40px;
+        align-items: center;
+        justify-content: center;
+        display:inline-flex;
+        padding: 20px 20px;
         margin-bottom: 5px;
         border: 2px solid black;
-        background-color: white;
+        background-color: rgba(243, 236, 44, 0.571);
         color: black;
         cursor: pointer;
         transition: background-color 0.3s, color 0.3s;
+        font-family: Century Gothic;
+        font-size: 25px;
+        font-weight: bold;
     }
 
     #textElement_1.active {
@@ -36,18 +63,23 @@
     }
 
     #textElement_2 {
-        width: 10px;
-        height: 20px;
+        width: 30px;
+        height: 30px;
         border-radius: 50%;
         text-align: center;
-        display: inline-block;
-        padding: 20px 40px;
+        align-items: center;
+        justify-content: center;
+        display:inline-flex;
+        padding: 20px 20px;
         margin-bottom: 5px;
         border: 2px solid black;
         background-color: white;
         color: black;
         cursor: pointer;
         transition: background-color 0.3s, color 0.3s;
+        font-family: Century Gothic;
+        font-size: 30px;
+        font-weight: bold;
     }
 
     #textElement_2.active {
@@ -57,23 +89,39 @@
 </style>
 </head>
 <body>
-    <div>
+    <div class="scroll-container_1">
         <div id="textElement_1" onclick="handleClick(this)" onmouseleave="handleMouseLeave(this)">君</div>
         <div id="textElement_1" onclick="handleClick(this)" onmouseleave="handleMouseLeave(this)">大姊夫</div>
         <div id="textElement_1" onclick="handleClick(this)" onmouseleave="handleMouseLeave(this)">二姊夫</div>
+        <div id="textElement_1" onclick="handleClick(this)" onmouseleave="handleMouseLeave(this)">婆婆</div>
         <div id="textElement_1" onclick="handleClick(this)" onmouseleave="handleMouseLeave(this)">小姨丈</div>
-        <div id="textElement_1" onclick="handleClick(this)" onmouseleave="handleMouseLeave(this)">媽媽</div>
         <div id="textElement_1" onclick="handleClick(this)" onmouseleave="handleMouseLeave(this)">小姨</div>
         <div id="textElement_1" onclick="handleClick(this)" onmouseleave="handleMouseLeave(this)">潔</div>
         <div id="textElement_1" onclick="handleClick(this)" onmouseleave="handleMouseLeave(this)">大姊</div>
         <div id="textElement_1" onclick="handleClick(this)" onmouseleave="handleMouseLeave(this)">二姊</div>
         <div id="textElement_1" onclick="handleClick(this)" onmouseleave="handleMouseLeave(this)">ㄚ</div>
         <div id="textElement_1" onclick="handleClick(this)" onmouseleave="handleMouseLeave(this)">彤</div>
-        <div id="textElement_1" onclick="handleClick(this)" onmouseleave="handleMouseLeave(this)">瑞</div>
-        <div id="textElement_1" onclick="handleClick(this)" onmouseleave="handleMouseLeave(this)">福</div>
+        <div id="textElement_1" onclick="handleClick(this)" onmouseleave="handleMouseLeave(this)">媽媽</div>
         <div id="textElement_1" onclick="handleClick(this)" onmouseleave="handleMouseLeave(this)">寶</div>
+        <div id="textElement_1" onclick="handleClick(this)" onmouseleave="handleMouseLeave(this)">福</div>
+        <div id="textElement_1" onclick="handleClick(this)" onmouseleave="handleMouseLeave(this)">瑞</div>
+        <div id="textElement_1" onclick="handleClick(this)" onmouseleave="handleMouseLeave(this)">米老鼠</div>
+        <div id="textElement_1" onclick="handleClick(this)" onmouseleave="handleMouseLeave(this)">牛魔王</div>
+        <div id="textElement_1" onclick="handleClick(this)" onmouseleave="handleMouseLeave(this)">笑面虎</div>
+        <div id="textElement_1" onclick="handleClick(this)" onmouseleave="handleMouseLeave(this)">兔寶寶</div>
+        <div id="textElement_1" onclick="handleClick(this)" onmouseleave="handleMouseLeave(this)">海龍王</div>
+        <div id="textElement_1" onclick="handleClick(this)" onmouseleave="handleMouseLeave(this)">蛇蓮娜</div>
+        <div id="textElement_1" onclick="handleClick(this)" onmouseleave="handleMouseLeave(this)">赤兔馬</div>
+        <div id="textElement_1" onclick="handleClick(this)" onmouseleave="handleMouseLeave(this)">大肥羊</div>
+        <div id="textElement_1" onclick="handleClick(this)" onmouseleave="handleMouseLeave(this)">美猴王</div>
+        <div id="textElement_1" onclick="handleClick(this)" onmouseleave="handleMouseLeave(this)">金雞母</div>
+        <div id="textElement_1" onclick="handleClick(this)" onmouseleave="handleMouseLeave(this)">史奴比</div>
+        <div id="textElement_1" onclick="handleClick(this)" onmouseleave="handleMouseLeave(this)">豬小弟</div>
+        <div id="textElement_1" onclick="handleClick(this)" onmouseleave="handleMouseLeave(this)">頑皮豹</div>
+        <div id="textElement_1" onclick="handleClick(this)" onmouseleave="handleMouseLeave(this)">小叮噹</div>
     </div>
-    <div>
+
+    <div class="scroll-container_2">
         <div id="textElement_2" onclick="handleClick(this)" onmouseleave="handleMouseLeave(this)">1</div>
         <div id="textElement_2" onclick="handleClick(this)" onmouseleave="handleMouseLeave(this)">2</div>
         <div id="textElement_2" onclick="handleClick(this)" onmouseleave="handleMouseLeave(this)">3</div>
@@ -84,17 +132,21 @@
         <div id="textElement_2" onclick="handleClick(this)" onmouseleave="handleMouseLeave(this)">8</div>
         <div id="textElement_2" onclick="handleClick(this)" onmouseleave="handleMouseLeave(this)">9</div>
         <div id="textElement_2" onclick="handleClick(this)" onmouseleave="handleMouseLeave(this)">0</div>
-    </div>
-    <div>
+
         <div id="textElement_2" onclick="handleClick(this)" onmouseleave="handleMouseLeave(this)">。</div>
     </div>
-    <div>
+
+    <div class="scroll-container_1">
+        <div id="textElement_1" onclick="hideLastPlayer()">變不見</div>
+        <div id="textElement_1" onclick="showAll()">全變回</div>
         <div id="textElement_1" onclick="resetOne()">按錯</div>
         <div id="textElement_1" onclick="deleteLast()">剛算錯</div>
         <div id="textElement_1" onclick="deleteAll()">全算錯</div>
-    <div id="textElement_1" onclick="copyTextToClipboard()">複製</div>
+        <div id="textElement_1" onclick="copyTextToClipboard()" style="color:white; background-color:rgb(170, 13, 13);">戰績</div>
     </div>
-    <div id="gameRecord" class="scroll-container"></div>
+
+    <div id="gameRecord" class="scroll-container">
+    </div>
 
     <script>
         var clickEnd = 1;
@@ -105,6 +157,7 @@
         var valueList = "";
         var clickTimes = 0;
         var currentWinner = "";
+        var lastPlayer = "";
 
         function handleClick(e) {
 		    e.classList.add('active');
@@ -145,14 +198,16 @@
             clickEnd = 1;
             valueList = "";
             clickTimes = 0;
+            lastPlayer = "";
         }
 
         function checkClickTimes(v) {
-            if (clickTimes == 1) { currentWinner = v }
+            if (clickTimes == 1) { currentWinner = v; }
             if (clickTimes == 2) { if (v == currentWinner) { return false } }
             if (clickTimes <= 2) {
                 if (isNumber(v) || v == "。") { return false; }
             }
+            lastPlayer = v;
             if (clickTimes >= 3) {
                 if (clickTimes >= 4) {
                     if (v == "。") { return true; }
@@ -186,11 +241,28 @@
             e.classList.remove('active');
         }
 
+        function showAll() {
+            document.querySelectorAll('div').forEach((input) => {
+                if (input.id == "textElement_1") {
+                    input.style.display = "inline-flex";
+                }
+            });
+        }
+
+        function hideLastPlayer() {
+            document.querySelectorAll('div').forEach((input) => {
+                if (input.id == "textElement_1" && input.innerText == lastPlayer) {
+                    input.style.display = "none";
+                }
+            });
+        }
+
         function copyTextToClipboard() {
         	allGames = sessionStorage.getItem('allGames');
             allGames = allGames + "delete from game where winner = loser or score <= 0 or score is null;SELECT player, SUM(score_change) AS net_score FROM (SELECT winner AS player, score AS score_change FROM game UNION ALL SELECT loser AS player, -score AS score_change FROM game) GROUP BY player ORDER BY net_score DESC;with pr1 as (select distinct player from (select winner as player from game union select loser from game)), pr2 as (select a.player as winner, b.player as loser from pr1 a, pr1 b where b.player <> a.player), pr3 as (select p.winner, p.loser, sum(g.score) from game g, pr2 p where g.winner = p.winner and g.loser = p.loser group by 1,2 order by 1,3 desc) select * from pr3;"
             navigator.clipboard.writeText(allGames).then(function() {
                 alert("已複製");
+                window.open("https://www.programiz.com/sql/online-compiler/", "_blank");
             }).catch(function(err) {
                 alert("沒有複製成功喔");
             });
