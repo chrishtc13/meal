@@ -164,6 +164,25 @@
         var currentWinner = "";
         var lastPlayer = "";
 
+        function getSelectedText() {
+            var selectedText = "";
+            if (window.getSelection) {
+                selectedText = window.getSelection().toString();
+            } else if (document.selection && document.selection.type != "Control") {
+                selectedText = document.selection.createRange().text;
+            }
+            return selectedText;
+        }
+        
+        document.addEventListener("mouseup", function() {
+            var hideThese = getSelectedText().split("\r\n").map(s => s.trim());
+            document.querySelectorAll('div').forEach((input) => {
+                if (input.id == "textElement_1" && hideThese.includes(input.innerText) && !(input.onmouseleave === null)) {
+                    input.style.display = "none";
+                }
+            });
+        });
+
         function handleClick(e) {
 		    e.classList.add('active');
 
