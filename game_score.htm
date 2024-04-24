@@ -9,10 +9,10 @@
         display: flex;
         overflow-x: auto;
         padding: 10px;
-        border: 1px solid #ccc;
-        margin-bottom: 20px;
+        border: 0px solid #ccc;
+        margin: 20px;
         height: 100px;
-        width: 90%;
+        width: 95%;
         font-family: 'Courier New', Courier, monospace;
         font-weight:bold;
     }
@@ -21,7 +21,7 @@
         display: inline-block;
         overflow-x: auto;
         padding: 10px;
-        border: 1px solid #ccc;
+        border: 0px solid #ccc;
         margin-bottom: 10px;
         height: 300px;
         width: 25%;
@@ -31,7 +31,7 @@
         display: inline-block;
         overflow-x: auto;
         padding: 10px;
-        border: 1px solid #ccc;
+        border: 0px solid #ccc;
         margin-bottom: 10px;
         height: 300px;
         width: 35%;
@@ -133,7 +133,9 @@
         <div id="textElement_2" onclick="handleClick(this)" onmouseleave="handleMouseLeave(this)">9</div>
         <div id="textElement_2" onclick="handleClick(this)" onmouseleave="handleMouseLeave(this)">0</div>
 
-        <div id="textElement_2" onclick="handleClick(this)" onmouseleave="handleMouseLeave(this)">。</div>
+        <div id="textElement_2" style="visibility:hidden">a</div>
+
+        <div id="textElement_2" onclick="handleClick(this)" onmouseleave="handleMouseLeave(this)" style="color:white; background-color:rgb(170, 13, 13);">。</div>
     </div>
 
     <div class="scroll-container_1">
@@ -145,8 +147,8 @@
         <div id="textElement_1" onclick="copyTextToClipboard()" style="color:white; background-color:rgb(170, 13, 13);">戰績</div>
     </div>
 
-    <div id="gameRecord" class="scroll-container">
-    </div>
+    <div id="gameRecord" class="scroll-container" style="display:none"></div>
+    <div id="gameRecordShow" class="scroll-container"></div>
 
     <script>
         var clickEnd = 1;
@@ -154,7 +156,10 @@
         var allGames = "drop table if exists game;create table game (serial_num integer, winner text, loser text, score integer);"
         updateGame();
         var isql = "insert into game values(";
+        var allGamesShow = "";
+        var allGamesShowLast = "";
         var valueList = "";
+        var valueListShow = "";
         var clickTimes = 0;
         var currentWinner = "";
         var lastPlayer = "";
@@ -180,6 +185,11 @@
 
             valueList = valueList + clickValue;
             valueList = valueList.replace(");","");
+            if (clickTimes == 1) { valueListShow += e.innerText + " 贏 "; }
+            if (clickTimes == 2) { valueListShow += e.innerText + " "; }
+            if (clickTimes > 2) {
+                if (e.innerText == '。') { valueListShow += " " + e.innerText; } else { valueListShow += e.innerText; }
+            }
 
             if (e.innerText == '。') {
                 regex = /^"[^0-9]+","[^0-9]+",[0-9]+$/;
@@ -187,6 +197,10 @@
                     sqlIns = isql + serialNum + "," + valueList + ");"
                     allGames = sessionStorage.getItem('allGames');
                     allGames = allGames ? allGames + sqlIns : sqlIns;
+                    allGamesShow = sessionStorage.getItem('allGamesShow');
+                    allGamesShow = allGamesShow ? allGamesShow + valueListShow : valueListShow;
+                    if (sessionStorage.getItem("allGamesShow") === undefined || sessionStorage.getItem("allGamesShow") === null)
+                    {} else { allGamesShowLast = sessionStorage.getItem("allGamesShow") };
                     updateGame();
                 }
 
@@ -197,6 +211,7 @@
         function resetOne() {
             clickEnd = 1;
             valueList = "";
+            valueListShow = "";
             clickTimes = 0;
             lastPlayer = "";
         }
@@ -219,11 +234,14 @@
 
         function deleteLast() {
             allGames = allGames + "delete from game where serial_num = " + serialNum + ";";
+            allGamesShow = allGamesShowLast;
             updateGame();
         }
 
         function deleteAll() {
             allGames = allGames + "delete from game;";
+            allGamesShow = "";
+            allGamesShowLast = "";
             updateGame();
         }
 
@@ -231,6 +249,10 @@
             sessionStorage.setItem('allGames', allGames);
             document.getElementById('gameRecord').innerHTML = allGames.replaceAll(");",");<br>");
             document.getElementById('gameRecord').innerHTML = allGames.replaceAll(";",";<br>");
+            if (!(allGamesShow === undefined)) {
+                sessionStorage.setItem('allGamesShow', allGamesShow);
+                document.getElementById('gameRecordShow').innerHTML = allGamesShow.replaceAll(" 。","<br>");
+            }
         }
 
         function isNumber(value) {
@@ -261,7 +283,7 @@
         	allGames = sessionStorage.getItem('allGames');
             allGames = allGames + "delete from game where winner = loser or score <= 0 or score is null;SELECT player, SUM(score_change) AS net_score FROM (SELECT winner AS player, score AS score_change FROM game UNION ALL SELECT loser AS player, -score AS score_change FROM game) GROUP BY player ORDER BY net_score DESC;with pr1 as (select distinct player from (select winner as player from game union select loser from game)), pr2 as (select a.player as winner, b.player as loser from pr1 a, pr1 b where b.player <> a.player), pr3 as (select p.winner, p.loser, sum(g.score) from game g, pr2 p where g.winner = p.winner and g.loser = p.loser group by 1,2 order by 1,3 desc) select * from pr3;"
             navigator.clipboard.writeText(allGames).then(function() {
-                alert("算好了，等會在新視窗：全選、貼上、執行");
+                alert("算好了，等一下新視窗出現後：全選、貼上、執行");
                 window.open("https://www.programiz.com/sql/online-compiler/", "_blank");
             }).catch(function(err) {
                 alert("沒算好，問一下");
