@@ -189,14 +189,6 @@
             });
         });
 
-        document.addEventListener("dblclick", function() {
-            var input = event.target;
-            if (input.id == "txt_1" && !(input.onmouseleave === null)) {
-                input.style.display = "none";
-                resetOne();
-            }
-        });
-
         function hck(e) {
 		    e.classList.add('active');
 
