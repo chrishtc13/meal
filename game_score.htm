@@ -11,7 +11,7 @@
         padding: 10px;
         border: 0px solid #ccc;
         margin: 20px;
-        height: 100px;
+        height: 200px;
         width: 95%;
         font-family: 'Courier New', Courier, monospace;
         font-weight:bold;
@@ -23,7 +23,7 @@
         padding: 10px;
         border: 0px solid #ccc;
         margin-bottom: 10px;
-        height: 300px;
+        height: 150px;
         width: 25%;
     }
 
@@ -33,7 +33,7 @@
         padding: 10px;
         border: 0px solid #ccc;
         margin-bottom: 10px;
-        height: 300px;
+        height: 150px;
         width: 35%;
     }
 
@@ -163,6 +163,11 @@
         var clickTimes = 0;
         var currentWinner = "";
         var lastPlayer = "";
+        var game_record = {};
+        var game_result = {};
+        var winner_this_one = "";
+        var loser_this_one = "";
+        var score_this_one = 0;
 
         function getSelectedText() {
             var selectedText = "";
@@ -222,6 +227,7 @@
             if (e.innerText == '。') {
                 regex = /^"[^0-9]+","[^0-9]+",[0-9]+$/;
                 if (regex.test(valueList)) {
+                    set_game_result(valueList);
                     sqlIns = isql + serialNum + "," + valueList + ");"
                     allGames = sessionStorage.getItem('allGames');
                     allGames = allGames ? allGames + sqlIns : sqlIns;
@@ -234,6 +240,60 @@
 
                 resetOne();
             }
+        }
+
+        function set_game_result(v) {
+            var game_record_this_one = v.replaceAll('"','').split(",");
+            winner_this_one = game_record_this_one[0];
+            loser_this_one = game_record_this_one[1];
+            score_this_one = parseInt(game_record_this_one[2]);
+
+            var property_name = winner_this_one + "輸贏";
+            if (game_result[property_name]) {
+                game_result[property_name] += score_this_one;    
+            } else { game_result[property_name] = score_this_one; }
+            property_name = loser_this_one + "輸贏";
+            if (game_result[property_name]) {
+                game_result[property_name] -= score_this_one;    
+            } else { game_result[property_name] = -score_this_one; }
+
+            property_name = winner_this_one + "贏" + loser_this_one;
+            if (game_record[property_name]) {
+                game_record[property_name] += score_this_one;    
+            } else { game_record[property_name] = score_this_one; }
+
+            property_name = loser_this_one + "贏" + winner_this_one;
+            if (game_record[property_name]) {
+                game_record[property_name] -= score_this_one;    
+            } else { game_record[property_name] = -score_this_one; }
+        }
+
+        function show_game_result() {
+            var sortedArray = Object.entries(game_result);
+
+            // Sort the array based on property values
+            sortedArray.sort((a, b) => b[1] - a[1]);
+            // Convert back into object
+            var sortedObject = Object.fromEntries(sortedArray);
+            // Print the sorted object
+            var result = "<table height=0 cellpadding=3 cellspacing=0><tr><td>  ==>  </td></tr></table></div><table height=0 cellpadding=3 cellspacing=0><tr><td colspan=2>輸贏</td></tr>"
+            for (var key in sortedObject) {
+                result += "<tr><td>" + key.replace("輸贏","") + "</td><td>" + sortedObject[key] + "</td></tr>";
+            }
+            result += "</table>";
+
+            sortedArray = Object.entries(game_record);
+            sortedArray.sort(function(a, b) { return a[0].localeCompare(b[0]) });
+            sortedObject = Object.fromEntries(sortedArray);
+            result += "<table height=0 cellpadding=3 cellspacing=0><tr><td>誰贏誰</td><td>多少</td></tr>"
+            for (var key in sortedObject) {
+                if (parseInt(sortedObject[key]) > 0) {
+                    result += "<tr><td>" + key.replace("贏"," => ") + "</td><td>" + sortedObject[key] + "</td></tr>";
+                }
+            }
+            result += "</table>";
+
+            document.getElementById('gameRecordShow').innerHTML += result;
         }
 
         function resetOne() {
@@ -262,6 +322,8 @@
         }
 
         function deleteLast() {
+            set_game_result(loser_this_one + "," + winner_this_one + "," + score_this_one);
+
             allGames = allGames + "delete from game where serial_num = " + serialNum + ";";
             allGamesShow = allGamesShowLast;
             updateGame();
@@ -272,6 +334,8 @@
             allGamesShow = "";
             allGamesShowLast = "";
             updateGame();
+            game_record = {};
+            game_result = {};
         }
 
         function updateGame() {
@@ -310,10 +374,13 @@
         }
 
         function copyTextToClipboard() {
+            show_game_result();
+            return;
+
         	allGames = sessionStorage.getItem('allGames');
             allGames = allGames + "delete from game where winner = loser or score <= 0 or score is null;SELECT player, SUM(score_change) AS net_score FROM (SELECT winner AS player, score AS score_change FROM game UNION ALL SELECT loser AS player, -score AS score_change FROM game) GROUP BY player ORDER BY net_score DESC;with pr1 as (select distinct player from (select winner as player from game union select loser from game)), pr2 as (select a.player as winner, b.player as loser from pr1 a, pr1 b where b.player <> a.player), pr3 as (select p.winner, p.loser, sum(g.score) from game g, pr2 p where g.winner = p.winner and g.loser = p.loser group by 1,2 order by 1,3 desc) select * from pr3;"
             navigator.clipboard.writeText(allGames).then(function() {
-                alert("算好了，等一下新視窗出現後：全選、貼上、執行");
+                alert("可以在等一下出現的新視窗驗算：全選、貼上、執行");
                 window.open("https://www.programiz.com/sql/online-compiler/", "_blank");
             }).catch(function(err) {
                 alert("沒算好，問一下");
