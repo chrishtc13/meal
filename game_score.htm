@@ -3,91 +3,150 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Game Score</title>
+    <title>算分</title>
     <style>
-    .scroll-container {
-        display: flex;
-        overflow-x: auto;
-        padding: 5px;
-        border: 0px;
-        margin: 20px;
-        height: 200px;
-        width: 95%;
-        font-family: 'Courier New', Courier, monospace;
-        font-weight:bold;
-    }
+        .scroll-container_0 {
+            display: block;
+            overflow-x: auto;
+            border: 0px;
+            margin: 5px;
+            width: 95%;
+            height: 95%;
+        }
 
-    .scroll-container_1 {
-        display: inline-block;
-        overflow-x: auto;
-        padding: 5px;
-        border: 0px solid #ccc;
-        margin-bottom: 2px;
-        height: 170px;
-        width: 30%;
-    }
+        .scroll-container {
+            display: inline-block;
+            overflow-x: auto;
+            padding: 5px;
+            border: 0px;
+            margin: 5px;
+            height: 200px;
+            width: 45%;
+            font-family: Courier New;
+            font-weight: bold;
+        }
 
-    .scroll-container_2 {
-        display: inline-block;
-        overflow-x: auto;
-        padding: 5px;
-        border: 0px solid #ccc;
-        margin-bottom: 2px;
-        height: 170px;
-        width: 33%;
-    }
+        .scroll-container_1 {
+            display: inline-block;
+            overflow-x: auto;
+            padding: 5px;
+            border: 0px;
+            margin: 2px;
+            height: 200px;
+            width: 30%;
+        }
 
-    #txt_1 {
-        width: 75px;
-        height: 20px;
-        border-radius: 10px;
-        text-align: center;
-        align-items: center;
-        justify-content: center;
-        display:inline-flex;
-        padding: 8px;
-        margin-bottom: 5px;
-        border: 2px solid black;
-        background-color: rgba(243, 236, 44, 0.571);
-        color: black;
-        cursor: pointer;
-        transition: background-color 0.3s, color 0.3s;
-        font-family: Century Gothic;
-        font-size: 20px;
-        font-weight: bold;
-    }
+        .scroll-container_2 {
+            display: inline-block;
+            overflow-x: auto;
+            padding: 5px;
+            border: 0px;
+            margin: 2px;
+            height: 200px;
+            width: 33%;
+        }
 
-    #txt_1.active {
-        background-color: orange;
-        color: white;
-    }
+        #clickShow {
+            border-radius: 10px;
+            text-align: center;
+            align-items: center;
+            justify-content: center;
+            display:inline-flex;
+            padding: 8px;
+            margin: 5px;
+            border: 2px solid black;
+            background-color: rgba(227, 183, 59, 0.571);
+            color: black;
+            transition: background-color 0.3s, color 0.3s;
+            font-family: Century Gothic;
+            font-size: 20px;
+            font-weight: bold;
+        }
 
-    #textElement_2 {
-        width: 30px;
-        height: 30px;
-        border-radius: 50%;
-        text-align: center;
-        align-items: center;
-        justify-content: center;
-        display:inline-flex;
-        padding: 10px;
-        margin-bottom: 5px;
-        border: 2px solid black;
-        background-color: white;
-        color: black;
-        cursor: pointer;
-        transition: background-color 0.3s, color 0.3s;
-        font-family: Century Gothic;
-        font-size: 30px;
-        font-weight: bold;
-    }
+        #txt_1 {
+            width: 75px;
+            height: 20px;
+            border-radius: 10px;
+            text-align: center;
+            align-items: center;
+            justify-content: center;
+            display:inline-flex;
+            padding: 8px;
+            margin-bottom: 5px;
+            border: 2px solid black;
+            background-color: rgba(243, 236, 44, 0.571);
+            color: black;
+            cursor: pointer;
+            transition: background-color 0.3s, color 0.3s;
+            font-family: Century Gothic;
+            font-size: 20px;
+            font-weight: bold;
+        }
 
-    #textElement_2.active {
-        background-color: orange;
-        color: white;
-    }
-</style>
+        #txt_1.active {
+            background-color: orange;
+            color: white;
+        }
+
+        #txt_2 {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            text-align: center;
+            align-items: center;
+            justify-content: center;
+            display:inline-flex;
+            padding: 10px;
+            margin-bottom: 5px;
+            border: 2px solid black;
+            background-color: white;
+            color: black;
+            cursor: pointer;
+            transition: background-color 0.3s, color 0.3s;
+            font-family: Century Gothic;
+            font-size: 30px;
+            font-weight: bold;
+        }
+
+        #txt_2.active {
+            background-color: orange;
+            color: white;
+        }
+
+        #player_me {
+            width: 40%;
+            height: 50%;
+            overflow-x: auto;
+            border-radius: 10px;
+            display:inline-block;
+            padding: 3px;
+            margin: 3px;
+            border: 2px solid black;
+            background-color: rgba(205, 188, 188, 0.934);
+            color: black;
+            transition: background-color 0.3s, color 0.3s;
+            font-family: Century Gothic;
+            font-size: 20px;
+            font-weight: bold;
+        }
+
+        #player_rest {
+            width: 93%;
+            height: 65%;
+            border-radius: 10px;
+            overflow-x: auto;
+            padding: 3px;
+            margin: 3px;
+            background-color: rgba(245, 226, 212, 0.863);
+            color: black;
+            transition: background-color 0.3s, color 0.3s;
+            font-family: Century Gothic;
+            font-size: 16px;
+            font-weight: bold;
+        }
+    </style>
 </head>
+
 <body>
     <div class="scroll-container_1">
         <div id="txt_1" onclick="hck(this)" onmouseleave="handleMouseLeave(this)">君</div>
@@ -122,179 +181,152 @@
     </div>
 
     <div class="scroll-container_2">
-        <div id="textElement_2" onclick="hck(this)" onmouseleave="handleMouseLeave(this)">1</div>
-        <div id="textElement_2" onclick="hck(this)" onmouseleave="handleMouseLeave(this)">2</div>
-        <div id="textElement_2" onclick="hck(this)" onmouseleave="handleMouseLeave(this)">3</div>
-        <div id="textElement_2" onclick="hck(this)" onmouseleave="handleMouseLeave(this)">4</div>
-        <div id="textElement_2" onclick="hck(this)" onmouseleave="handleMouseLeave(this)">5</div>
-        <div id="textElement_2" onclick="hck(this)" onmouseleave="handleMouseLeave(this)">6</div>
-        <div id="textElement_2" onclick="hck(this)" onmouseleave="handleMouseLeave(this)">7</div>
-        <div id="textElement_2" onclick="hck(this)" onmouseleave="handleMouseLeave(this)">8</div>
-        <div id="textElement_2" onclick="hck(this)" onmouseleave="handleMouseLeave(this)">9</div>
-        <div id="textElement_2" onclick="hck(this)" onmouseleave="handleMouseLeave(this)">0</div>
+        <div id="txt_2" onclick="hck(this)" onmouseleave="handleMouseLeave(this)">1</div>
+        <div id="txt_2" onclick="hck(this)" onmouseleave="handleMouseLeave(this)">2</div>
+        <div id="txt_2" onclick="hck(this)" onmouseleave="handleMouseLeave(this)">3</div>
+        <div id="txt_2" onclick="hck(this)" onmouseleave="handleMouseLeave(this)">4</div>
+        <div id="txt_2" onclick="hck(this)" onmouseleave="handleMouseLeave(this)">5</div>
+        <div id="txt_2" onclick="hck(this)" onmouseleave="handleMouseLeave(this)">6</div>
+        <div id="txt_2" onclick="hck(this)" onmouseleave="handleMouseLeave(this)">7</div>
+        <div id="txt_2" onclick="hck(this)" onmouseleave="handleMouseLeave(this)">8</div>
+        <div id="txt_2" onclick="hck(this)" onmouseleave="handleMouseLeave(this)">9</div>
+        <div id="txt_2" onclick="hck(this)" onmouseleave="handleMouseLeave(this)">0</div>
 
-        <div id="textElement_2" style="visibility:hidden">a</div>
+        <div id="txt_2" style="visibility:hidden">space</div>
 
-        <div id="textElement_2" onclick="hck(this)" onmouseleave="handleMouseLeave(this)" style="color:white; background-color:rgb(170, 13, 13);">。</div>
+        <div id="txt_2" onclick="hck(this)" style="color:white; background-color:rgb(170, 13, 13);">。</div>
     </div>
 
     <div class="scroll-container_1">
-        <div id="txt_1" onclick="hideLastPlayer()">變不見</div>
-        <div id="txt_1" onclick="showAll()">全變回</div>
-        <div id="txt_1" onclick="resetOne()">按錯</div>
-        <div id="txt_1" onclick="deleteLast()">剛算錯</div>
-        <div id="txt_1" onclick="deleteAll()">全算錯</div>
-        <div id="txt_1" onclick="copyTextToClipboard()" style="color:white; background-color:rgb(170, 13, 13);">戰績</div>
+        <div id="txt_1" onclick="resetOne()">按錯</div><br>
+        <div id="txt_1" onclick="hideLastPlayer()">變不見</div><br>
+        <div id="txt_1" onclick="showAll()">全變回</div><br>
+        <div id="clickShow" style="visibility:hidden"></div>
     </div>
 
-    <div id="gameRecord" class="scroll-container" style="display:none"></div>
-    <div id="gameRecordShow" class="scroll-container"></div>
+    <div id="gameRecord" class="scroll-container_0">
+      <div id="gameRecordShow" class="scroll-container" style="width:30%"></div>
+      <div id="gameResultShow" class="scroll-container"></div>
+    </div>
 
     <script>
-        var clickEnd = 1;
-        var serialNum = 0;
-        var allGames = "drop table if exists game;create table game (serial_num integer, winner text, loser text, score integer);"
         updateGame();
-        var isql = "insert into game values(";
         var allGamesShow = "";
-        var allGamesShowLast = "";
         var valueList = "";
         var valueListShow = "";
         var clickTimes = 0;
         var currentWinner = "";
         var lastPlayer = "";
-        var game_record = {};
         var game_result = {};
         var winner_this_one = "";
         var loser_this_one = "";
         var score_this_one = 0;
 
-        function getSelectedText() {
-            var selectedText = "";
-            if (window.getSelection) {
-                selectedText = window.getSelection().toString();
-            } else if (document.selection && document.selection.type != "Control") {
-                selectedText = document.selection.createRange().text;
-            }
-            return selectedText;
-        }
-        
-        document.addEventListener("mouseup", function() {
-            var hideThese = getSelectedText().split("\r\n").map(s => s.trim());
-            document.querySelectorAll('div').forEach((input) => {
-                if (input.id == "txt_1" && hideThese.includes(input.innerText) && !(input.onmouseleave === null)) {
-                    input.style.display = "none";
-                    resetOne();
-                }
-            });
-        });
-
         function hck(e) {
 		    e.classList.add('active');
 
             clickTimes++;
-            if (! checkClickTimes(e.innerText)) { clickTimes = clickTimes-1; return; }
+            if (! checkClickTimes(e.innerText)) { clickTimes--; return; }
 
-            pap = isNumber(e.innerText) ? '' : '"';
-            pap2 = isNumber(e.innerText) ? '' : ',';
-            
-            clickValue = e.innerText == '。' ? ');' : pap + e.innerText + pap + pap2;
-
-            if (clickEnd == 1) {
-                serialNum = serialNum + 1;
-                insertValue = isql + serialNum + "," + clickValue;
-                clickEnd = 0;
-            } else {
-                insertValue = clickValue;
-            }
-
+            pap = isNumber(e.innerText) ? '' : ',';
+            clickValue = e.innerText == '。' ? '' : e.innerText + pap;
             valueList = valueList + clickValue;
-            valueList = valueList.replace(");","");
             if (clickTimes == 1) { valueListShow += "<tr><td>" + e.innerText + "</td><td>贏</td>"; }
-            if (clickTimes == 2) { valueListShow += "<td>" + e.innerText + "</td><td>"; }
+            if (clickTimes == 2) { valueListShow += "<td>" + e.innerText + "</td><td style='text-align:right'>"; }
             if (clickTimes > 2) {
                 if (e.innerText == '。') { valueListShow += "</td>"; } else { valueListShow += e.innerText; }
             }
 
             if (e.innerText == '。') {
-                regex = /^"[^0-9]+","[^0-9]+",[0-9]+$/;
+                var game_record_this_one = valueList.split(",");
+                score_this_one = parseInt(game_record_this_one[2]);
+                if (score_this_one == 0) { resetOne(); return; }
+
+                regex = /^[^0-9]+,[^0-9]+,[0-9]+$/;
                 if (regex.test(valueList)) {
                     set_game_result(valueList);
-                    sqlIns = isql + serialNum + "," + valueList + ");"
-                    allGames = sessionStorage.getItem('allGames');
-                    allGames = allGames ? allGames + sqlIns : sqlIns;
                     allGamesShow = sessionStorage.getItem('allGamesShow');
                     allGamesShow = allGamesShow ? allGamesShow + valueListShow : valueListShow;
-                    if (sessionStorage.getItem("allGamesShow") === undefined || sessionStorage.getItem("allGamesShow") === null)
-                    {} else { allGamesShowLast = sessionStorage.getItem("allGamesShow") };
                     updateGame();
                 }
 
                 resetOne();
+            } else {
+                document.getElementById('clickShow').style.visibility = "visible";
+                document.getElementById('clickShow').innerHTML = valueListShow;
             }
         }
 
         function set_game_result(v) {
-            var game_record_this_one = v.replaceAll('"','').split(",");
+            var game_record_this_one = v.split(",");
             winner_this_one = game_record_this_one[0];
             loser_this_one = game_record_this_one[1];
             score_this_one = parseInt(game_record_this_one[2]);
 
-            var property_name = winner_this_one + "輸贏";
-            if (game_result[property_name]) {
-                game_result[property_name] += score_this_one;    
-            } else { game_result[property_name] = score_this_one; }
-            property_name = loser_this_one + "輸贏";
-            if (game_result[property_name]) {
-                game_result[property_name] -= score_this_one;    
-            } else { game_result[property_name] = -score_this_one; }
+            var pn;
 
-            property_name = winner_this_one + "贏" + loser_this_one;
-            if (game_record[property_name]) {
-                game_record[property_name] += score_this_one;    
-            } else { game_record[property_name] = score_this_one; }
+            pn = (winner_this_one + "輸贏");
+            if (game_result[pn] === undefined) { game_result[pn] = 0 }
+            game_result[pn] += score_this_one;
 
-            property_name = loser_this_one + "贏" + winner_this_one;
-            if (game_record[property_name]) {
-                game_record[property_name] -= score_this_one;    
-            } else { game_record[property_name] = -score_this_one; }
+            pn = (loser_this_one + "輸贏");
+            if (game_result[pn] === undefined) { game_result[pn] = 0 }
+            game_result[pn] -= score_this_one;
+
+            if (game_result[winner_this_one] === undefined) { game_result[winner_this_one] = {}; } 
+            if (game_result[loser_this_one] === undefined) { game_result[loser_this_one] = {}; } 
+            if (game_result[winner_this_one][loser_this_one] === undefined) { game_result[winner_this_one][loser_this_one] = 0; } 
+            if (game_result[loser_this_one][winner_this_one] === undefined) { game_result[loser_this_one][winner_this_one] = 0; } 
+
+            game_result[winner_this_one][loser_this_one] += score_this_one;
+            game_result[loser_this_one][winner_this_one] -= score_this_one;
         }
 
         function show_game_result() {
             var sortedArray = Object.entries(game_result);
 
-            // Sort the array based on property values
             sortedArray.sort((a, b) => b[1] - a[1]);
-            // Convert back into object
             var sortedObject = Object.fromEntries(sortedArray);
-            // Print the sorted object
-            var result = "<table height=0 cellpadding=3 cellspacing=0><tr><td>  ==>  </td></tr></table></div><table border=1 height=0 cellpadding=3 cellspacing=0><tr><td colspan=2>輸贏</td></tr>"
-            for (var key in sortedObject) {
-                result += "<tr><td>" + key.replace("輸贏","") + "</td><td>" + sortedObject[key] + "</td></tr>";
-            }
-            result += "</table>";
+            var result = ""
+            var player_one = "";
+            var highlight = "";
+            var lose = false;
 
-            sortedArray = Object.entries(game_record);
-            sortedArray.sort(function(a, b) { return a[0].localeCompare(b[0]) });
-            sortedObject = Object.fromEntries(sortedArray);
-            result += "<table border=1 height=0 cellpadding=3 cellspacing=0><tr><td>誰贏誰</td><td>多少</td></tr>"
             for (var key in sortedObject) {
-                if (parseInt(sortedObject[key]) > 0) {
-                    result += "<tr><td>" + key.replace("贏"," => ") + "</td><td>" + sortedObject[key] + "</td></tr>";
+                player_one = key;
+                if (player_one.indexOf("輸贏") == -1) { continue }
+
+                player_one = key.replace("輸贏","");
+                
+                lose = (parseInt(sortedObject[key]) < 0);
+                result += "<div id='player_me'>" + player_one + "&nbsp";
+                result += (lose ? "<font color=red>" : "") + sortedObject[key] + (lose ? "</font>" : "")
+
+                sortedArray2 = Object.entries(game_result[player_one]);
+                sortedArray2.sort((a, b) => b[1] - a[1]);
+                sortedObject2 = Object.fromEntries(sortedArray2);
+                result2 = "<div id='player_rest'>";
+                for (var key2 in sortedObject2) {
+                    if (parseInt(sortedObject2[key2]) != 0) {
+                        result2 += key2 + "&nbsp" + sortedObject2[key2] + "<br>";
+                    }
                 }
-            }
-            result += "</table>";
+                result2 += "</div></div>";
 
-            document.getElementById('gameRecordShow').innerHTML += result;
+                result += result2;
+            }
+ 
+            document.getElementById('gameResultShow').innerHTML = result;
         }
 
         function resetOne() {
-            clickEnd = 1;
             valueList = "";
             valueListShow = "";
             clickTimes = 0;
             lastPlayer = "";
             currentWinner = "";
+            document.getElementById('clickShow').style.visibility = "hidden";
+            document.getElementById('clickShow').innerHTML = "";
         }
 
         function checkClickTimes(v) {
@@ -313,30 +345,11 @@
             return true;
         }
 
-        function deleteLast() {
-            set_game_result(loser_this_one + "," + winner_this_one + "," + score_this_one);
-
-            allGames = allGames + "delete from game where serial_num = " + serialNum + ";";
-            allGamesShow = allGamesShowLast;
-            updateGame();
-        }
-
-        function deleteAll() {
-            allGames = allGames + "delete from game;";
-            allGamesShow = "";
-            allGamesShowLast = "";
-            updateGame();
-            game_record = {};
-            game_result = {};
-        }
-
         function updateGame() {
-            sessionStorage.setItem('allGames', allGames);
-            document.getElementById('gameRecord').innerHTML = allGames.replaceAll(");",");<br>");
-            document.getElementById('gameRecord').innerHTML = allGames.replaceAll(";",";<br>");
             if (!(allGamesShow === undefined)) {
                 sessionStorage.setItem('allGamesShow', allGamesShow);
                 document.getElementById('gameRecordShow').innerHTML = "<table height=0 cellpadding=3 cellspacing=0>" + allGamesShow + "</table>";
+                show_game_result();
             }
         }
 
@@ -362,20 +375,6 @@
                     input.style.display = "none";
                     resetOne();
                 }
-            });
-        }
-
-        function copyTextToClipboard() {
-            show_game_result();
-            return;
-
-        	allGames = sessionStorage.getItem('allGames');
-            allGames = allGames + "delete from game where winner = loser or score <= 0 or score is null;SELECT player, SUM(score_change) AS net_score FROM (SELECT winner AS player, score AS score_change FROM game UNION ALL SELECT loser AS player, -score AS score_change FROM game) GROUP BY player ORDER BY net_score DESC;with pr1 as (select distinct player from (select winner as player from game union select loser from game)), pr2 as (select a.player as winner, b.player as loser from pr1 a, pr1 b where b.player <> a.player), pr3 as (select p.winner, p.loser, sum(g.score) from game g, pr2 p where g.winner = p.winner and g.loser = p.loser group by 1,2 order by 1,3 desc) select * from pr3;"
-            navigator.clipboard.writeText(allGames).then(function() {
-                alert("可以在等一下出現的新視窗驗算：全選、貼上、執行");
-                window.open("https://www.programiz.com/sql/online-compiler/", "_blank");
-            }).catch(function(err) {
-                alert("沒算好，問一下");
             });
         }
 </script>
