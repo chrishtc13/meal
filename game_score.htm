@@ -187,14 +187,12 @@
     <div id="gameRecordShow" class="scroll-container"></div>
 
     <script>
-        updateGame();
-        var allGamesShow = "";
+        show_game_result();
         var valueList = "";
         var valueListShow = "";
         var clickTimes = 0;
         var currentWinner = "";
         var lastPlayer = "";
-        var game_result = {};
         var winner_this_one = "";
         var loser_this_one = "";
         var score_this_one = 0;
@@ -224,9 +222,10 @@
                 regex = /^[^0-9]+,[^0-9]+,[0-9]+$/;
                 if (regex.test(valueList)) {
                     set_game_result(valueList);
-                    allGamesShow = sessionStorage.getItem('allGamesShow');
+                    var allGamesShow = sessionStorage.getItem('allGamesShow');
                     allGamesShow = allGamesShow ? allGamesShow + valueListShow : valueListShow;
-                    updateGame();
+                    sessionStorage.setItem('allGamesShow', allGamesShow);
+                    show_game_result();
                 }
 
                 resetOne();
@@ -237,6 +236,9 @@
         }
 
         function set_game_result(v) {
+            var game_result = JSON.parse(sessionStorage.getItem('allGamesResult'));
+            game_result = game_result == null ? {} : game_result;
+
             var game_record_this_one = v.split(",");
             winner_this_one = game_record_this_one[0];
             loser_this_one = game_record_this_one[1];
@@ -259,9 +261,18 @@
 
             game_result[winner_this_one][loser_this_one] += score_this_one;
             game_result[loser_this_one][winner_this_one] -= score_this_one;
+
+            sessionStorage.setItem('allGamesResult', JSON.stringify(game_result));
         }
 
         function show_game_result() {
+            var allGamesShow = sessionStorage.getItem('allGamesShow');
+            if (allGamesShow == null) return;
+
+            document.getElementById('gameRecordShow').innerHTML = "<table height=0 cellpadding=3 cellspacing=2>" + allGamesShow + "</table>";
+
+            var game_result = JSON.parse(sessionStorage.getItem('allGamesResult'));
+
             var sortedArray = Object.entries(game_result);
 
             sortedArray.sort((a, b) => b[1] - a[1]);
@@ -322,14 +333,6 @@
                 if (! isNumber(v)) { return false; }
             }
             return true;
-        }
-
-        function updateGame() {
-            if (!(allGamesShow === undefined)) {
-                sessionStorage.setItem('allGamesShow', allGamesShow);
-                document.getElementById('gameRecordShow').innerHTML = "<table height=0 cellpadding=3 cellspacing=2>" + allGamesShow + "</table>";
-                show_game_result();
-            }
         }
 
         function isNumber(value) {
