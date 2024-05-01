@@ -157,7 +157,7 @@
         <div id="txt_1" onclick="hck(this)" onmouseleave="handleMouseLeave(this)">小叮噹</div>
     </div>
 
-    <div class="scroll-container_1" style="width:110px">
+    <div class="scroll-container_1" style="width:130px">
         <div id="txt_1" onclick="resetOne()">按錯</div><br>
         <div id="txt_1" onclick="hideLastPlayer()">變不見</div><br>
         <div id="txt_1" onclick="showAll()">全變回</div><br>
@@ -208,7 +208,9 @@
             pap = isNumber(e.innerText) ? '' : ',';
             clickValue = e.innerText == '。' ? '' : e.innerText + pap;
             valueList = valueList + clickValue;
-            if (clickTimes == 1) { valueListShow += "<tr><td>" + e.innerText + "</td><td>贏</td>"; }
+            if (clickTimes == 1) { 
+                valueListShow += "<tr><td>" + e.innerText + "</td><td>贏</td>";
+            }
             if (clickTimes == 2) { valueListShow += "<td>" + e.innerText + "</td><td style='text-align:right'>"; }
             if (clickTimes > 2) {
                 if (e.innerText == '。') { valueListShow += "</td>"; } else { valueListShow += e.innerText; }
@@ -325,7 +327,7 @@
         function updateGame() {
             if (!(allGamesShow === undefined)) {
                 sessionStorage.setItem('allGamesShow', allGamesShow);
-                document.getElementById('gameRecordShow').innerHTML = "<table height=0 cellpadding=3 cellspacing=0>" + allGamesShow + "</table>";
+                document.getElementById('gameRecordShow').innerHTML = "<table height=0 cellpadding=3 cellspacing=2>" + allGamesShow + "</table>";
                 show_game_result();
             }
         }
