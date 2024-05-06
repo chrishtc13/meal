@@ -39,7 +39,7 @@
             color: black;
             transition: background-color 0.3s, color 0.3s;
             font-family: Century Gothic;
-            font-size: 20px;
+            font-size: 10px;
             font-weight: bold;
         }
 
@@ -173,8 +173,6 @@
 
     <div class="scroll-container_1" style="width:100px">
         <div id="txt_1" onclick="resetOne()">按錯</div><br>
-        <div id="txt_1" onclick="hideLastPlayer()" name="hide_show">變不見</div><br>
-        <div id="txt_1" onclick="showAll()" name="hide_show">全變回來</div><br>
         <div id="clickShow" style="visibility:hidden"></div>
     </div>
 
@@ -206,10 +204,11 @@
         var valueListShow = "";
         var clickTimes = 0;
         var currentWinner = "";
-        var lastPlayer = "";
+        var currentLosers = [];
         var winner_this_one = "";
         var loser_this_one = "";
         var score_this_one = 0;
+        var serial_number = 0;
 
         function hck(e) {
 		    e.classList.add('active');
@@ -217,32 +216,46 @@
             clickTimes++;
             if (! checkClickTimes(e.innerText)) { clickTimes--; return; }
 
-            pap = isNumber(e.innerText) ? '' : ',';
-            clickValue = e.innerText == '。' ? '' : e.innerText + pap;
-            valueList = valueList + clickValue;
-            if (clickTimes == 1) { 
-                valueListShow += "<tr><td>" + e.innerText + "</td><td>贏</td>";
-            }
-            if (clickTimes == 2) { valueListShow += "<td>" + e.innerText + "</td><td style='text-align:right'>"; }
-            if (clickTimes > 2) {
-                if (e.innerText == '。') { valueListShow += "</td>"; } else { valueListShow += e.innerText; }
-            }
+            pap = isNumber(e.innerText) || e.innerText == '。' ? '' : ',';
+            valueList = valueList + pap + e.innerText + pap;
+            valueListShow = valueList.replaceAll(",,",",").replaceAll("。","").substring(1);
 
+            // 結算這一局
             if (e.innerText == '。') {
-                var game_record_this_one = valueList.split(",");
-                score_this_one = parseInt(game_record_this_one[2]);
-                if (score_this_one == 0) { resetOne(); return; }
+                var game_record_this_one = valueListShow.split(",");
+                var serial = 0;
+                var win_lose_one = [];
+                var win_lose_all = [];
+                game_record_this_one.forEach((input) => {
+                    serial++;
+                    if (serial > 1) {
+                        if (! isNumber(input)) { win_lose_one = [currentWinner, input, 0]; win_lose_all.push(win_lose_one); }
+                        if (isNumber(input)) { win_lose_all.forEach((ws) => { if (ws[2] == 0) ws[2] = input }) }
+                    }
+                });
 
-                regex = /^[^0-9]+,[^0-9]+,[0-9]+$/;
-                if (regex.test(valueList)) {
-                    set_game_result(valueList);
-                    var allGamesShow = sessionStorage.getItem('allGamesShow');
-                    allGamesShow = allGamesShow ? allGamesShow + valueListShow : valueListShow;
-                    sessionStorage.setItem('allGamesShow', allGamesShow);
-                    show_game_result();
-                }
+                serial_number = sessionStorage.getItem('serial_number');
+                serial_number++;
+                var bgColor = serial_number % 2 ? " #ccd1d1" : " #aeb6bf"
+                var currentTime = (new Date()).toLocaleTimeString();
 
-                resetOne();
+                win_lose_all.forEach((ws) => {
+                    score_this_one = parseInt(ws[2]);
+                    if (score_this_one > 0) {
+                        valueList = ws[0] + "," + ws[1] + "," + ws[2];
+                        regex = /^[^0-9]+,[^0-9]+,[0-9]+$/;
+                        if (regex.test(valueList)) {
+                            set_game_result(valueList);
+                            valueListShow = "<tr bgcolor=" + bgColor + "><td>" + currentTime + "</td><td>" + serial_number + "</td><td>" + ws[0] + "</td><td>贏</td><td>" + ws[1] + "</td><td>" + score_this_one + "</td></tr>";
+                            var allGamesShow = sessionStorage.getItem('allGamesShow');
+                            allGamesShow = allGamesShow ? allGamesShow + valueListShow : valueListShow;
+                            sessionStorage.setItem('allGamesShow', allGamesShow);
+                            sessionStorage.setItem('serial_number', serial_number);
+                            show_game_result();
+                        }
+                    }
+                    resetOne();
+                })
             } else {
                 document.getElementById('clickShow').style.visibility = "visible";
                 document.getElementById('clickShow').innerHTML = valueListShow;
@@ -306,7 +319,7 @@
             var allGamesShow = sessionStorage.getItem('allGamesShow');
             if (allGamesShow == null) return;
 
-            document.getElementById('gameRecordShow').innerHTML = "<table height=0 cellpadding=3 cellspacing=2>" + allGamesShow + "</table>";
+            document.getElementById('gameRecordShow').innerHTML = "<table height=0 cellpadding=6 cellspacing=1>" + allGamesShow + "</table>";
 
             var game_result = JSON.parse(sessionStorage.getItem('allGamesResult'));
 
@@ -350,25 +363,24 @@
             valueList = "";
             valueListShow = "";
             clickTimes = 0;
-            lastPlayer = "";
             currentWinner = "";
+            currentLosers = [];
             document.getElementById('clickShow').style.visibility = "hidden";
             document.getElementById('clickShow').innerHTML = "";
         }
 
         function checkClickTimes(v) {
             if (clickTimes == 1) { currentWinner = v; }
-            if (clickTimes == 2) { if (v == currentWinner) { return false } }
+            if (clickTimes >= 2) {
+                if ((! isNumber(v)) && (! v == "。")) {
+                    if (v == currentWinner) return false;
+                    if (! currentLosers.includes(v)) { currentLosers.push(v) } else { return false }
+                }
+            }
             if (clickTimes <= 2) {
                 if (isNumber(v) || v == "。") { return false; }
             }
-            lastPlayer = v;
-            if (clickTimes >= 3) {
-                if (clickTimes >= 4) {
-                    if (v == "。") { return true; }
-                }
-                if (! isNumber(v)) { return false; }
-            }
+
             return true;
         }
 
@@ -378,23 +390,6 @@
 
         function handleMouseLeave(e) {
             e.classList.remove('active');
-        }
-
-        function showAll() {
-            document.querySelectorAll('div').forEach((input) => {
-                if (input.getAttribute("player") == "y") {
-                    input.style.display = "inline-flex";
-                }
-            });
-        }
-
-        function hideLastPlayer() {
-            document.querySelectorAll('div').forEach((input) => {
-                if (input.getAttribute("player") == "y" && input.innerText == lastPlayer) {
-                    input.style.display = "none";
-                    resetOne();
-                }
-            });
         }
 </script>
 </body>
