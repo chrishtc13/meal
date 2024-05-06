@@ -258,7 +258,7 @@
                 })
             } else {
                 document.getElementById('clickShow').style.visibility = "visible";
-                document.getElementById('clickShow').innerHTML = valueListShow;
+                document.getElementById('clickShow').innerHTML = valueListShow.replace(",","贏");
             }
         }
 
@@ -370,8 +370,8 @@
         function checkClickTimes(v) {
             if (clickTimes == 1) { currentWinner = v; }
             if (clickTimes >= 2) {
-                if ((! isNumber(v)) && (! v == "。")) {
-                    if (v == currentWinner) return false;
+                if (v == currentWinner) { return false }
+                if ((! isNumber(v)) && ( v != "。")) {
                     if (! currentLosers.includes(v)) { currentLosers.push(v) } else { return false }
                 }
             }
