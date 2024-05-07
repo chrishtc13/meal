@@ -258,6 +258,7 @@
                 })
             } else {
                 document.getElementById('clickShow').style.visibility = "visible";
+                // replace the first "," only
                 document.getElementById('clickShow').innerHTML = valueListShow.replace(",","贏");
             }
         }
@@ -296,12 +297,12 @@
             // user defined players
             var params = new URLSearchParams(document.location.search);
             if (params.get("p")) {
-                var ud_players = params.get("p").split(",");
-                if (ud_players != null) {
+                var ud_players = get_players(params.get("p").replace(/[^a-zA-Z,\u4e00-\u9fff]/g, '').split(","));
+                if (ud_players != null && ud_players.length > 1) {
                     var player_serial = 0;
                     document.querySelectorAll('div').forEach((input) => {
                         if (input.getAttribute("player") == "y") {
-                            if (player_serial < ud_players.length && !isNumber(ud_players[player_serial]) ) {
+                            if (player_serial < ud_players.length && !isNumber(ud_players[player_serial]) && ud_players[player_serial] ) {
                                 input.innerText = ud_players[player_serial];
                                 input.style.display = "inline-flex";
                             } else {
@@ -388,6 +389,11 @@
 
         function handleMouseLeave(e) {
             e.classList.remove('active');
+        }
+
+        function get_players(arr) {
+            const cleaned = arr.map(item => item.replace(/\s/g, ''));
+            return [...new Set(cleaned)];
         }
 </script>
 </body>
