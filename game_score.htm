@@ -300,7 +300,7 @@
             // user defined players
             var params = new URLSearchParams(document.location.search);
             if (params.get("p")) {
-                var ud_players = get_players(params.get("p").replace(/[^a-zA-Z,\u4e00-\u9fff]/g, '').split(","));
+                var ud_players = get_players(params.get("p").replace(/[^a-zA-Z,\u4e00-\u9fff]/g, '').split(",").split("，"));
                 if (ud_players != null && ud_players.length > 1) {
                     var player_serial = 0;
                     document.querySelectorAll('div').forEach((input) => {
