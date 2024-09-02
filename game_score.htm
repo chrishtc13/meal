@@ -5,6 +5,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>算分</title>
     <style>
+        .parent {
+            display: flex;
+            flex-direction: row;
+            align-items: flex-start;
+            border: 0px solid #000;
+            flex-wrap: wrap;
+            width: 99%;
+        }
+
         .scroll-container {
             display: inline-block;
             padding: 5px;
@@ -127,6 +136,7 @@
 </head>
 
 <body>
+    <div class="parent">
     <div class="scroll-container_1">
         <div id="txt_1" onclick="hck(this)" onmouseleave="handleMouseLeave(this)" player="y">君</div>
         <div id="txt_1" onclick="hck(this)" onmouseleave="handleMouseLeave(this)" player="y">大姊夫</div>
@@ -192,6 +202,7 @@
         <div id="txt_2" style="visibility:hidden">space</div>
 
         <div id="txt_2" onclick="hck(this)" style="color:white; background-color:rgb(170, 13, 13);">。</div>
+    </div>
     </div>
 
     <div id="clickShow" style="display:none"></div>
