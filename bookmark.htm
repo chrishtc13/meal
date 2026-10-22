@@ -7,7 +7,7 @@
     <style>
         body {
             font-family: Arial, sans-serif;
-            font-size: 120%;
+            font-size: 100%;
             display: flex;
             justify-content: center;
             align-items: center;
@@ -22,6 +22,13 @@
             flex-direction: column;
             align-items: center;
             border: 1px dotted #333;
+        }
+        label {
+            background-color: darkred;
+            color: #ffffff;
+            padding: 10px 20px;
+            border-radius: 4px;
+            font-weight: bold;
         }
         a {
             display: inline-block;
@@ -64,10 +71,10 @@
 <div class="parent-div">
     <div>
         <a href="https://www.google.com.tw/index.html">Google</a>
+        <a href="https://www.cwa.gov.tw/V8/C/W/Town/Town.html?TID=1000401">天氣</a>
         <hr size=1>
-        <label style="background-color: darkred; color: #ffffff; padding: 10px 20px; border-radius: 4px; font-weight: bold;">
-            FB
-        </label> 
+        <label>FB</label> 
+        <hr size=1>
         <a href="https://www.facebook.com/profile.php?id=61550755052973&locale=zh_TW">Home</a>
         <a href="https://www.facebook.com/saved">珍藏</a>
         <a href="https://www.facebook.com/reel/966127462995460">Reels</a>
@@ -82,6 +89,8 @@
         <a href="https://www.facebook.com/61550755052973/allactivity?activity_history=false&category_key=TRASH&manage_mode=true&should_load_landing_page=false&locale=zh_TW">垃圾桶</a>
     </div>
     <div>
+        <label>見聞</label> 
+        <hr size=1>
         <a href="https://m.cn.nytimes.com/zh-hant/">紐時</a>
         <a href="https://www.ftchinese.com/">FT</a>
         <a href="https://zh.cn.nikkei.com/">日經</a>
@@ -90,6 +99,8 @@
         <a href="https://www.fccpartner.com/article.php?lang=tw&tb=6">黃齊元</a>
     </div>    
     <div>
+        <label>市場</label> 
+        <hr size=1>
         <a href="https://finance.yahoo.com/quotes/NOK,NKE,INTC,INTW,AMD,DAMD,NVDA,MRVL,SPCX,SPCH,SSPC,WB,NBIS,NBIZ,1810.HK,0625.HK/">Hold</a>
         <a href="https://www.wantgoo.com/futures/wtxp&">台指夜盤</a>
         <a href="https://finance.yahoo.com/quotes/%5ESOX,SOXX,SOXL,SOXS,%5EIXIC,SQQQ,%5EGSPC,%5EDJI/">美股大盤</a>
@@ -97,15 +108,20 @@
         <a href="https://finance.yahoo.com/quotes/0151.HK,2202.HK,6862.HK,3750.HK,1211.HK,0700.HK,BILI,VWAGY,ARGT,SNAP,LASE,URA,GFUZ/">機會嗎？</a>
         <a href="https://finance.yahoo.com/quotes/CRWV,CRWG,CORD,NBIZ,TSLQ,PTIR,PLTZ,ORCZ/">long-short-ETF</a>
         <a href="https://www.wantgoo.com/member/portfolio">玩股網-自選股</a>
+        <a href="https://stock.capital.com.tw/z/zm/zmd/zmdb.djhtm">權值計算機</a>
         <hr size=1>
         <a href="https://finance.yahoo.com/quotes/688825.SS,000660.KS,005930.KS,%5EKS11,%5EN225,%5EHSI,%5EJKSE">長鑫-海力士-三星-韓股-日股-港股-印尼股市</a>
         <a href="https://hk.investing.com/rates-bonds/japan-10-year-bond-yield-historical-data">日本十年期公債殖利率</a>
         <a href="https://finance.yahoo.com/quotes/CNY=X,CNYTWD=X,TWD=X,JPYTWD=X,JPY=X,%5ETNX/">人民幣-台幣-日圓-美債十年殖利率</a>
         <hr size=1>
+        <label>GitHub/Gmail</label> 
+        <hr size=1>
         <a href="https://github.com/chrishtc13/meal/edit/main/bookmark.htm">書籤更新</a>
         <a href="https://mail.google.com/mail/u/0/#inbox">Gmail</a>
         <a href="https://github.com/login">GitHub login</a>
         <a href="https://github.com/logout">GitHub logout</a>
+        <hr size=1>
+        <label>市值</label> 
         <hr size=1>
         <a href="https://companiesmarketcap.com/">全球 155</a>
         <a href="https://companiesmarketcap.com/usa/largest-companies-in-the-usa-by-market-cap/">美國 80</a>
@@ -132,15 +148,14 @@
         <a href="https://companiesmarketcap.com/luxury-goods/largest-luxury-goods-companies-by-market-cap/">奢侈品 838-B</a>
     </div>
     <div>
-        <a href="https://www.cwa.gov.tw/V8/C/W/Town/Town.html?TID=1000401">天氣</a>
-        <a href="https://stock.capital.com.tw/z/zm/zmd/zmdb.djhtm">權值計算機</a>
-        <hr size=1>
         <a href="https://finance.yahoo.com/quotes/ASML,TSM,NVDA,AAPL,GOOG,MSFT,SPCX,TSLA,META,AMZN,PLTR,ORCL,SAP,IBM/">US-Big</a>
         <a href="https://finance.yahoo.com/quotes/WMT,COST,MCD,NKE,ADDYY,LKNCY,SBUX,DIS,NFLX,GLW/">US-Life</a>
         <a href="https://finance.yahoo.com/quotes/MRNA,MRK,BNTX,PFE,LLY/">製藥</a>
         <a href="https://finance.yahoo.com/quotes/688836.SS,9880.HK,2590.HK">機器人：宇樹-優必選-極智嘉</a>
         <a href="https://finance.yahoo.com/quotes/ABBN.SW,6506.T,6954.T,SYM">機器人：瑞士ABB-日本安川電機-日本發那科-美國SYM</a>
         <a href="https://finance.yahoo.com/quotes/2513.hk,0100.hk,9992.hk,EDU,0981.HK,688825.SS,688256.SS,002371.SZ/">智譜-MiniMax-泡泡瑪特-新東方-中芯國際-長鑫-寒武紀-北方華創</a>
+        <hr size=1>
+        <label>好讀</label> 
         <hr size=1>
         <a href="https://nassimtaleb.org/">塔雷伯</a>
         <a href="https://vocus.cc/salon/65a4d41dfd89780001ea8f67">陳華夫</a>
@@ -149,9 +164,8 @@
         <a href="https://woosean.pixnet.net/blog">天空 約定城邦</a>
         <a href="https://www.gatesnotes.com/">大慈善家 比爾蓋茲</a>
         <hr size=1>
-        <label style="background-color: darkred; color: #ffffff; padding: 10px 20px; border-radius: 4px; font-weight: bold;">
-            張五常
-        </label> 
+        <label>張五常/yu</label> 
+        <hr size=1>
         <a href="https://blog.sina.com.cn/zhangwuchang">新浪</a>
         <a href="https://nscheung.blogspot.com/">blog</a>
         <a href="https://www.master-insight.com/author/zhangwuchang">灼見名家</a>
